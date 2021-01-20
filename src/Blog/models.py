@@ -11,12 +11,12 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    update_date = models.DateTimeField(auto_now=True)
     image = models.URLField(max_length=400, default='https://unsplash.com/photos/xgP_opYfHEg')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=OPTIONS, default='d')
 
-    def _str_(self):
+    def __str__(self):
         return self.title
 
     def comment_count(self):
