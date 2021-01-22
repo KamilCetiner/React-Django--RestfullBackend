@@ -9,18 +9,24 @@ from rest_framework.permissions import IsAuthenticated,AllowAny
 
 # Create your views here.
 
-@api_view(['GET','POST'])
+
+
+@api_view(['GET'])
 @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated,AllowAny])
-def post_list_create(request):
+@permission_classes([AllowAny])
+def post_list(request):
     if request.method == 'GET':
-        permission_classes([AllowAny])
         post = Post.objects.all()
+        post = post.filter(status = 'p')
         serializer = PostSerializer(post,many = True)
         return Response(serializer.data)
-    
-    elif request.method == 'POST':
-        permission_classes([IsAuthenticated])
+ 
+ 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])   
+def post_create(request):  
+    if request.method == 'POST':
         serializer = PostSerializer(data=request.data)
         request.data['author'] = request.user.id
         if serializer.is_valid():
@@ -34,6 +40,8 @@ def post_list_create(request):
     
     
 @api_view(['GET','DELETE','PUT'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated]) 
 def post_get_update_delete(request,id):
     post = get_object_or_404(Post,id = id)
     if request.method == 'GET':

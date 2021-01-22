@@ -16,6 +16,7 @@ class Post(models.Model):
     image = models.URLField(max_length=400,default='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.webmasterpro.de%2Fcoding%2Farticle%2Fframework-django-konventionen.html&psig=AOvVaw1M9yqS3Ssaxns61eMMQpUh&ust=1611224927907000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJjyzOWmqu4CFQAAAAAdAAAAABAD')
     status = models.CharField(max_length=10,choices=OPTIONS,default='d')
     author = models.ForeignKey(User,on_delete=models.CASCADE)
+    slug = models.SlugField(blank=True, unique=True)
     
     def _str_(self):
         return self.title
