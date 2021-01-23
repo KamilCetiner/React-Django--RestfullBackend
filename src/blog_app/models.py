@@ -17,8 +17,11 @@ class Post(models.Model):
     status = models.CharField(max_length=10,choices=OPTIONS,default='d')
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     slug = models.SlugField(blank=True, unique=True)
+
+    class Meta:
+        ordering = ['-publish_date']
     
-    def _str_(self):
+    def __str__(self):
         return self.title
     
     def comment_count(self):
@@ -40,14 +43,19 @@ class Comment(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     content = models.TextField()
     time =models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-time']
     
-    def _str_(self):
+    def __str__(self):
         return self.user.username
+
+        
 class Like(models.Model):
      user = models.ForeignKey(User,on_delete=models.CASCADE)
      post = models.ForeignKey(Post,on_delete=models.CASCADE)
      
-     def _str_(self):
+     def __str__(self):
         return self.user.username
     
 class View(models.Model):
@@ -55,5 +63,5 @@ class View(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
     
-    def _str_(self):
+    def __str__(self):
         return self.user.username
