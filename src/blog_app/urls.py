@@ -9,6 +9,5 @@ urlpatterns = [
     path('<str:slug>/update/',post_update_delete,name='update'),
     path('<str:slug>/like/', like_view, name="like"),
     path('<str:slug>/comment/', comment_view, name="comment"),
-        path('<str:slug>/like/', like_view, name="like"),
 
 ]

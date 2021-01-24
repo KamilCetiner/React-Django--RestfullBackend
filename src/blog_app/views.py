@@ -45,7 +45,7 @@ def post_create(request):
 def post_get(request,slug):
     post = get_object_or_404(Post,slug = slug)
     view_qs = View.objects.filter(user=request.user.id, post=post)
-    if view_qs:
+    if not view_qs:
         pass
     else:
         serializer = PostDetailSerializer(data = request.data)
@@ -74,7 +74,7 @@ def post_update_delete(request,slug):
             serializer = PostSerializer(post, data=request.data)
             
             if serializer.is_valid():
-                
+
                 serializer.save(author=request.user)
                 data={
                     "message": "Post updated successfully!"
@@ -99,6 +99,7 @@ def post_update_delete(request,slug):
 def comment_view(request, slug):
     post = get_object_or_404(Post, slug=slug)
     serializer = CommentSerializer(data=request.data)
+    
     if request.method == 'POST': 
         if serializer.is_valid():
             serializer.save(user=request.user, post= post)
