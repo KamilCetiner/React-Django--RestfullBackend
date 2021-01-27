@@ -1,4 +1,5 @@
 from django.db import models
+<<<<<<< HEAD
 from django.contrib.auth.models import User
 
 
@@ -15,3 +16,7 @@ class Profile(models.Model):
         return f"{self.first_name} {self.last_name}"
     def __str__(self):
         return f"{self.user.username}"
+=======
+
+# Create your models here.
+>>>>>>> 43842a513313145bbc63fa830d51ba69e1069ed1
