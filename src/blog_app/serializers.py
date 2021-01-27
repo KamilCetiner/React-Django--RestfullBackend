@@ -12,6 +12,7 @@ class CommentSerializer(serializers.ModelSerializer):
         read_only_fields = ["post","time", "user"]
          
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.CharField( source="author.username", read_only=True)
     
     class Meta:
         model = Post
@@ -35,6 +36,8 @@ class PostSerializer(serializers.ModelSerializer):
         
          
 class PostDetailSerializer(serializers.ModelSerializer):
+    author = serializers.CharField( source="author.username", read_only=True)
+
     comments = CommentSerializer(many= True)
     class Meta:
         model = Post
