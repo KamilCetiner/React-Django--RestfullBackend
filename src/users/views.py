@@ -35,7 +35,6 @@ def profile_view(request):
                    }
             return Response(data,status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-=======
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from .serializers import RegisterSerializer
@@ -56,4 +55,3 @@ def registerView(request):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status= status.HTTP_400_BAD_REQUEST)
->>>>>>> 43842a513313145bbc63fa830d51ba69e1069ed1
