@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.shortcuts import get_object_or_404
 from .serializers import RegisterSerializer, ProfileSerializer
 from rest_framework.decorators import api_view
